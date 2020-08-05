@@ -1,4 +1,4 @@
-var treeIMG, boyIMG, mango1, ground
+var mango1, boyIMG, treeIMG, ground
 const Engine = Matter.Engine;
 const World = Matter.World;
 const Bodies = Matter.Bodies;
@@ -17,6 +17,10 @@ function setup() {
 	engine = Engine.create();
 	world = engine.world;
 
+	mango1 = new Mango(950,750, this.widht, this.height);
+	mango1.scale = 0.25
+	//Mango.scale = 0.09
+
 	tree = createSprite(900,470,50,50);
 	tree.addImage(treeIMG);
 	tree.scale = 0.5;
@@ -27,10 +31,7 @@ function setup() {
 	boy.addImage(boyIMG);
 	boy.scale = 0.15;
 
-	mango1 = new Mango(950,600,50, 25);
-	//mango1.scale = 0.25
-	//Mango.scale = 0.09
-
+	
 	ground=createSprite(0,700,1200,50);
 	ground.shapeColor = "white";
 	ground.scale = 2;
@@ -46,7 +47,7 @@ function setup() {
 function draw() {
   rectMode(CENTER);
   background("black");
-  
+  //ellipse();
   mango1.display();
   //ground.display();
   drawSprites();
