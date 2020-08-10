@@ -1,4 +1,4 @@
-var  boyIMG, ground,tree, mango1
+var  boy, ground,tree, mango1, mango2,mango3, slingshot
 const Engine = Matter.Engine;
 const World = Matter.World;
 const Bodies = Matter.Bodies;
@@ -7,7 +7,7 @@ const Body = Matter.Body;
 function preload()
 {
 	
-	boyIMG = loadImage("boy.png");
+	
 
 }
 
@@ -25,18 +25,22 @@ function setup() {
 
 	mango1 = new Mango(950,750, this.width, this.height);
 	mango1.scale = 0.25
-	
 
-	
+	mango2 = new Mango(1025,750, this.width, this.height);
+	mango1.scale = 0.25
 
-	boy = createSprite(200,700,50,50);
-	boy.addImage(boyIMG);
-	boy.scale = 0.15;
-
+	mango3 = new Mango(850,750, this.width, this.height);
+	mango1.scale = 0.25
 	
-	ground=createSprite(0,790,1200,25);
-	ground.shapeColor = "blue";
-	ground.scale = 2;
+    
+	boy = new Boy(400,600,this.width, this.height)
+	boy.scale = 0.5;
+
+	ground = new Ground(0,750,1200,25);
+	ground.scale = 1;
+	ground.shapeColor = "white";
+
+	slingShot = new SlingShot(boy.body,{x:250,y:500})
 
 	
 
@@ -54,15 +58,27 @@ function draw() {
 Engine.update(engine)
   rectMode(CENTER);
   background("black");
-  mango1.display();
+  
   tree.display();
-  mango1.depth = tree.depth;
-	tree.depth = tree.depth+1;
+  mango1.display();
+  mango2.display();
+  boy.display();
+  ground.display();
+  slingshot.display();
+  
   
   
   
   drawSprites();
  
+}
+
+function mouseDragged(){
+    Matter.Body.setPosition(boy.body,{x:mouseX,y:mouseY})
+}
+
+function mouseReleased(){
+    slingShot.fly();
 }
 
 
