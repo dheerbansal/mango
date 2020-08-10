@@ -18,6 +18,7 @@ class Mango{
        //ImageMode(CENTER);
         rectMode(CENTER);
        // Mango.scale = 0.25
-        image(this.image, 700, 450, this.width, this.height);
+        image(this.image, 800, 450, this.width, this.height);
+        
     }
 }
