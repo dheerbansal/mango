@@ -1,52 +1,42 @@
-var  boy, ground,tree, mango1, mango2,mango3, slingshot
+var ground, tree, mango1, mango2,mango3,mango4, mango5,boyIMG,stone, slingshot
 const Engine = Matter.Engine;
 const World = Matter.World;
 const Bodies = Matter.Bodies;
 const Body = Matter.Body;
+const Constraint = Matter.Constraint;
 
 function preload()
 {
-	
-	
-
+	boyIMG = loadImage("boy.png");
 }
 
 function setup() {
 	createCanvas(1200, 800);
-	
+
+
 	engine = Engine.create();
 	world = engine.world;
+//ground
+	ground = new Ground(600,780,1200,20)
+//teee
+	tree = new Tree(650,400,300,400)
+//mango variables
+	mango1 = new Mango(680,500,50);
+	mango2 = new Mango(750,500,50);
+	mango3 = new Mango(820,500,50)
+	mango4 = new Mango(750,420,50);
+	mango5 = new Mango(870,550,50)
+//boy
+	boy = createSprite(300,700,70,80);
+	boy.addImage(boyIMG);
+	boy.scale = 0.09;
 
-	
-	//Mango.scale = 0.09
+//stone
+	stone = new Stone(220,620,50);
+//slingshot
+    slingshot = new SlingShot(240,650,stone.body);
 
-	tree = new Tree(980,470,this.width, this.height)
-	tree.scale = 1;
-
-	mango1 = new Mango(950,750, this.width, this.height);
-	mango1.scale = 0.25
-
-	mango2 = new Mango(1025,750, this.width, this.height);
-	mango1.scale = 0.25
-
-	mango3 = new Mango(850,750, this.width, this.height);
-	mango1.scale = 0.25
-	
-    
-	boy = new Boy(400,600,this.width, this.height)
-	boy.scale = 0.5;
-
-	ground = new Ground(0,750,1200,25);
-	ground.scale = 1;
-	ground.shapeColor = "white";
-
-	slingShot = new SlingShot(boy.body,{x:250,y:500})
-
-	
-
-	
-
-	
+	//Create the Bodies Here.
 
 
 	Engine.run(engine);
@@ -55,31 +45,35 @@ function setup() {
 
 
 function draw() {
-Engine.update(engine)
   rectMode(CENTER);
-  background("black");
-  
+  background(0);
+
+  ground.display();
   tree.display();
   mango1.display();
   mango2.display();
-  boy.display();
-  ground.display();
+  mango3.display();
+  mango4.display();
+  mango5.display();
+  stone.display();
   slingshot.display();
-  
-  
-  
-  
   drawSprites();
  
 }
 
 function mouseDragged(){
-    Matter.Body.setPosition(boy.body,{x:mouseX,y:mouseY})
+    Matter.Body.setPosition(stone.body,{x:mouseX,y:mouseY})
 }
 
 function mouseReleased(){
-    slingShot.fly();
+   slingshot.fly();
 }
 
+function keyPressed(){
+	if(keyCode === UP_ARROW){
+		slingshot = new SlingShot(215,630,stone.body);
+		
+	}
+}
 
 

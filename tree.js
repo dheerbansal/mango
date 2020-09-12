@@ -1,15 +1,29 @@
 class Tree{
     constructor(x,y,width,height){
-        this.body = Bodies.rectangle(x,y,width,height)
-        this.width = 150;
-        this.height = 100
+        var options={
+            isStatic:true
+           //restitution:2.0
+        
+        }
+        this.x = x
+        this.y = y
+        this.width = width
+        this.height = height
         this.image = loadImage("tree.png")
+        this.body = Bodies.rectangle(this.x,this.y,this.width,this.height,options)
         World.add(world,this.body)
     }
     display(){
-        rectMode(CENTER)
-      //  rect(900,470,100,90)
-        image(this.image, 750,275,200, 500)
-       
-    }
+        
+            var pos =this.body.position;
+            push();
+            translate(pos.x, pos.y);
+            rectMode(CENTER);
+            fill(255);
+           //rect(0, 0, this.width, this.height);
+            image(this.image,0,0,this.width, this.height)
+            pop();
+          } 
+        
+    
 }
