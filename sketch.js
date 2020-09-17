@@ -19,7 +19,7 @@ function setup() {
 //ground
 	ground = new Ground(600,780,1200,20)
 //teee
-	tree = new Tree(650,400,300,400)
+	tree = new Tree(850,400,300,400)
 //mango variables
 	mango1 = new Mango(680,500,50);
 	mango2 = new Mango(750,500,50);
@@ -34,7 +34,7 @@ function setup() {
 //stone
 	stone = new Stone(220,620,50);
 //slingshot
-    slingshot = new SlingShot(240,650,stone.body);
+    slingshot = new SlingShot(230,650,stone.body);
 
 	//Create the Bodies Here.
 
@@ -48,6 +48,15 @@ function draw() {
   rectMode(CENTER);
   background(0);
 
+  Engine.update(engine);
+
+  detectCollision(stone,mango1)
+  detectCollision(stone,mango2)
+  detectCollision(stone,mango3)
+  detectCollision(stone,mango4)
+  detectCollision(stone,mango5)
+
+
   ground.display();
   tree.display();
   mango1.display();
@@ -57,6 +66,14 @@ function draw() {
   mango5.display();
   stone.display();
   slingshot.display();
+
+  
+
+  
+
+  
+
+
   drawSprites();
  
 }
@@ -76,4 +93,14 @@ function keyPressed(){
 	}
 }
 
+function detectCollision(lstone,lmango){
+	mangoBodyPosition = lmango.body.position
+	stoneBodyPosition = lstone.body.position
+	
+	var distance = dist(stoneBodyPosition.x,stoneBodyPosition.y,mangoBodyPosition.x,mangoBodyPosition.y)
+	if(distance<=lmango.r+lstone.r)
+	{
+		Matter.body.setStatic(lmango.body,false);
+	}
+}
 
